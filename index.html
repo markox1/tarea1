@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Leer para comprender</title>
+<style>
+:root{--bg:#f4f8fb;--card:#fff;--tx:#17324d;--mut:#5b7186;--pri:#1f6f9f;--acc:#17a398;--ok:#1e8e4e;--okbg:#e3f6ea;--bad:#c0392b;--badbg:#fdeaea;--bd:#d8e3ec;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1b26;--card:#17283a;--tx:#e6eef5;--mut:#9db3c6;--pri:#5bb4e5;--acc:#3fd0c4;--ok:#5fd18a;--okbg:#17382a;--bad:#ff8a7a;--badbg:#3d1f1f;--bd:#2a4157}}
+:root[data-theme="dark"]{--bg:#0f1b26;--card:#17283a;--tx:#e6eef5;--mut:#9db3c6;--pri:#5bb4e5;--acc:#3fd0c4;--ok:#5fd18a;--okbg:#17382a;--bad:#ff8a7a;--badbg:#3d1f1f;--bd:#2a4157}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.55 "Nunito","Segoe UI",system-ui,sans-serif}
+h1,h2,h3{font-family:"Poppins","Segoe UI",system-ui,sans-serif;line-height:1.25;margin:0 0 .5em}
+header{background:linear-gradient(120deg,var(--pri),var(--acc));color:#fff;padding:18px 16px 10px}
+header h1{font-size:1.35rem;margin:0}header p{margin:2px 0 10px;opacity:.95;font-size:.9rem}
+nav{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px}
+nav button{flex:none;border:0;border-radius:999px;padding:8px 14px;font:inherit;font-size:.88rem;cursor:pointer;background:rgba(255,255,255,.22);color:#fff}
+nav button.on{background:#fff;color:#17324d;font-weight:700}
+nav button:focus-visible,.btn:focus-visible,.opt:focus-visible{outline:3px solid #ffb703;outline-offset:2px}
+main{max-width:860px;margin:0 auto;padding:18px 16px 40px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;text-align:center}
+.stat b{display:block;font-size:1.7rem;color:var(--pri)}.stat span{color:var(--mut);font-size:.85rem}
+.bar{height:10px;background:var(--bd);border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pri),var(--acc));transition:width .4s}
+.mod{cursor:pointer;display:flex;gap:12px;align-items:center;text-align:left;width:100%;font:inherit;color:inherit;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:10px}
+.mod:hover{border-color:var(--pri)}.mod .ic{font-size:1.8rem}.mod div{flex:1}.mod small{color:var(--mut)}
+.chip{font-size:.75rem;padding:2px 10px;border-radius:99px;background:var(--bd);color:var(--mut)}.chip.d{background:var(--okbg);color:var(--ok);font-weight:700}
+.read{border-left:5px solid var(--acc);background:var(--bg);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:1.05rem}
+.btn{border:0;border-radius:10px;padding:10px 16px;font:inherit;cursor:pointer;background:var(--pri);color:#fff;font-weight:700}
+.btn.sec{background:transparent;color:var(--pri);border:2px solid var(--pri)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.q{margin:18px 0;padding-top:14px;border-top:1px dashed var(--bd)}.q p{font-weight:700;margin:0 0 8px}
+.tag{display:inline-block;font-size:.72rem;border-radius:6px;padding:1px 8px;background:var(--bd);color:var(--mut);margin-bottom:6px}
+.opt{display:block;width:100%;text-align:left;font:inherit;color:inherit;background:var(--card);border:2px solid var(--bd);border-radius:10px;padding:10px 12px;margin-bottom:8px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--pri)}.opt.ok{background:var(--okbg);border-color:var(--ok)}.opt.no{background:var(--badbg);border-color:var(--bad)}
+.fb{margin-top:6px;padding:8px 12px;border-radius:8px;font-size:.93rem}.fb.ok{background:var(--okbg)}.fb.no{background:var(--badbg)}
+details{border:1px solid var(--bd);border-radius:10px;padding:10px 12px;margin:8px 0;background:var(--card)}summary{cursor:pointer;font-weight:700}
+label.ck{display:flex;gap:10px;align-items:flex-start;margin:8px 0;cursor:pointer}
+.res{text-align:center;font-size:1.1rem}.res b{font-size:2.4rem;color:var(--pri);display:block}
+.tbl{overflow-x:auto}
+</style>
+</head>
+<body>
+<header>
+  <h1>📖 Leer para comprender</h1>
+  <p>Estrategias de comprensión lectora con apoyo digital · Competencias de mediación en tecnología educativa</p>
+  <nav id="nav" aria-label="Navegación principal"></nav>
+</header>
+<main id="app" tabindex="-1"></main>
+
+<script>
+const TXT1="Mariana vive en Guanacaste. Todas las mañanas, antes de ir a la escuela, camina hasta el río para llenar dos baldes de agua. Hoy el río bajó tanto que apenas se veía un hilito de agua. Mariana miró al cielo, suspiró y regresó a casa con los baldes casi vacíos.";
+const TXT3="AVISO A LA COMUNIDAD: El jueves 8 de octubre habrá un corte de agua programado de 8:00 a.m. a 4:00 p.m. en Barrio Los Ángeles. Se recomienda almacenar agua con anticipación.";
+const M={
+ m1:{n:"Módulo 1 · Lectura literal",ic:"🔎",d:"Encuentra información que está escrita en el texto.",text:TXT1,
+  intro:"La <b>lectura literal</b> responde preguntas cuya respuesta aparece <b>tal cual</b> en el texto. Lee y responde.",
+  qs:[
+   {q:"¿Dónde vive Mariana?",o:["En Guanacaste","En San José","En Limón"],c:0,f:"El texto dice: «Mariana vive en Guanacaste»."},
+   {q:"¿Qué hace Mariana antes de ir a la escuela?",o:["Juega junto al río","Llena dos baldes de agua","Ayuda en la cocina"],c:1,f:"Camina hasta el río para llenar dos baldes de agua."},
+   {q:"¿Cómo estaba el río hoy?",o:["Desbordado","Muy bajo","Congelado"],c:1,f:"Apenas se veía un hilito de agua."}]},
+ m2:{n:"Módulo 2 · Inferencias",ic:"💡",d:"Lee entre líneas: deduce lo que el texto no dice directamente.",text:TXT1,
+  intro:"La <b>lectura inferencial</b> usa pistas del texto y tus conocimientos para <b>deducir</b> información que no está escrita. Usa el mismo texto.",
+  extra:[["Pista 1","«Miró al cielo»: ¿qué suele buscar una persona en el cielo cuando falta agua?"],["Pista 2","«Suspiró»: un suspiro suele expresar una emoción. ¿Cuál?"],["Pista 3","Un río casi seco ocurre en la época sin lluvias."]],
+  qs:[
+   {q:"¿Por qué Mariana miró al cielo?",o:["Esperaba que lloviera","Buscaba un ave","Estaba aburrida"],c:0,f:"Es una inferencia: el río está seco y ella espera lluvia."},
+   {q:"¿Cómo se sintió Mariana al final?",o:["Feliz","Preocupada","Enojada con su maestra"],c:1,f:"Suspiró y volvió con los baldes vacíos: está preocupada."},
+   {q:"¿Qué época del año es probablemente?",o:["Época lluviosa","Época seca","No se puede saber nada"],c:1,f:"El río bajó mucho: pistas de época seca."},
+   {q:"«Mariana vive en Guanacaste». Esta información es…",o:["Literal","Inferencial"],c:0,f:"Está escrita tal cual en el texto."},
+   {q:"«Mariana está preocupada». Esta idea es…",o:["Literal","Inferencial"],c:1,f:"No se dice directamente; se deduce de sus acciones."}]},
+ m3:{n:"Módulo 3 · Textos de la vida diaria",ic:"📰",d:"Aplica lo aprendido en un aviso real.",text:TXT3,
+  intro:"Leer bien también sirve para la vida diaria. Lee este aviso comunitario.",
+  qs:[
+   {q:"¿Qué día será el corte de agua?",o:["Jueves 8 de octubre","Viernes 9 de octubre","Lunes 5 de octubre"],c:0,f:"Literal: «El jueves 8 de octubre»."},
+   {q:"¿Cuántas horas durará el corte?",o:["4 horas","8 horas","12 horas"],c:1,f:"De 8:00 a.m. a 4:00 p.m. son 8 horas."},
+   {q:"¿Por qué recomiendan almacenar agua?",o:["Porque el agua estará más cara","Porque durante el corte no habrá agua","Porque el agua se contaminará"],c:1,f:"Inferencia: sin servicio, hay que tener reserva."}]},
+ quiz:{n:"Evaluación final",ic:"🏆",d:"8 preguntas para comprobar lo aprendido.",
+  intro:"Responde con calma. Recibirás retroalimentación en cada pregunta y un puntaje al final.",
+  qs:[
+   {q:"La idea principal de un texto es…",o:["Lo más importante que dice el autor sobre el tema","El primer dato que aparece","La palabra más larga"],c:0,f:"Es el mensaje central; las demás ideas la apoyan."},
+   {q:"Una pregunta cuya respuesta está escrita tal cual en el texto es…",o:["Literal","Inferencial"],c:0,f:"Literal = información explícita."},
+   {q:"«Leer entre líneas» corresponde a una lectura…",o:["Literal","Inferencial"],c:1,f:"Se deduce con pistas del texto."},
+   {q:"Antes de leer, una buena estrategia es…",o:["Mirar título e imágenes y predecir de qué trata","Leer solo el final","Saltarse el título"],c:0,f:"Predecir activa tus saberes previos."},
+   {q:"Si no entiendes una palabra, lo mejor es…",o:["Ignorar todo el texto","Buscar pistas en la oración o consultar un diccionario","Adivinar sin leer"],c:1,f:"El contexto y el diccionario te ayudan."},
+   {q:"Resumir significa…",o:["Copiar el texto completo","Decir lo esencial con tus propias palabras","Cambiar el título"],c:1,f:"Un resumen conserva lo esencial, más corto y propio."},
+   {q:"«Llovió tanto que las calles parecían ríos». Se puede inferir que…",o:["Hubo una lluvia muy fuerte","Las calles eran ríos reales","No llovió"],c:0,f:"Es una comparación: la lluvia fue intensa."},
+   {q:"¿Qué estrategia ayuda a comprobar que comprendiste?",o:["Explicar el texto con tus palabras","Leer más rápido","Leer sin detenerte"],c:0,f:"Si puedes explicarlo, lo comprendiste."}]}
+};
+const KEYS=["m1","m2","m3","quiz"];
+const S={};KEYS.forEach(k=>S[k]={a:{},});
+const $=s=>document.querySelector(s);
+const done=k=>Object.keys(S[k].a).length;
+const right=k=>Object.values(S[k].a).filter(x=>x).length;
+const tot=k=>M[k].qs.length;
+let view="home";
+
+function nav(){
+ const items=[["home","🏠 Inicio"],["obj","🎯 Objetivos"],["m1","1 Literal"],["m2","2 Inferencias"],["m3","3 Vida diaria"],["quiz","Evaluación"],["fin","Cierre"]];
+ $("#nav").innerHTML=items.map(([id,t])=>`<button data-v="${id}" class="${view===id?'on':''}" ${view===id?'aria-current="page"':''}>${t}</button>`).join("");
+ document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>go(b.dataset.v));
+}
+function go(v){view=v;render();window.scrollTo({top:0,behavior:"smooth"})}
+function pct(){const a=KEYS.reduce((s,k)=>s+done(k),0),t=KEYS.reduce((s,k)=>s+tot(k),0);return Math.round(a/t*100)}
+function score(){return KEYS.reduce((s,k)=>s+right(k),0)}
+function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="es-419";u.rate=.92;speechSynthesis.speak(u)}catch(e){}}
+function stop(){try{speechSynthesis.cancel()}catch(e){}}
+const order=["home","obj","m1","m2","m3","quiz","fin"];
+function pager(){const i=order.indexOf(view);return `<div class="row">${i>0?`<button class="btn sec" onclick="go('${order[i-1]}')">← Anterior</button>`:""}${i<order.length-1?`<button class="btn" onclick="go('${order[i+1]}')">Siguiente →</button>`:""}<button class="btn sec" onclick="go('home')">🏠 Inicio</button></div>`}
+
+function home(){
+ const st=`<div class="grid"><div class="stat"><b>${pct()}%</b><span>Progreso total</span></div><div class="stat"><b>${score()}/${KEYS.reduce((s,k)=>s+tot(k),0)}</b><span>Respuestas correctas</span></div><div class="stat"><b>${KEYS.filter(k=>done(k)===tot(k)).length}/4</b><span>Actividades completas</span></div></div>
+ <div class="card"><div class="bar" role="progressbar" aria-valuenow="${pct()}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct()}%"></i></div></div>`;
+ const mods=KEYS.map(k=>{const d=done(k),t=tot(k);return `<button class="mod" onclick="go('${k}')"><span class="ic">${M[k].ic}</span><div><b>${M[k].n}</b><br><small>${M[k].d}</small><div class="bar" style="margin-top:6px"><i style="width:${d/t*100}%"></i></div></div><span class="chip ${d===t?'d':''}">${d===t?'✔ Listo':d+'/'+t}</span></button>`}).join("");
+ return `<div class="card"><h2>¡Bienvenido/a!</h2><p>Este es tu tablero de aprendizaje. Aquí verás tu avance. Elige una actividad para comenzar o sigue el orden sugerido.</p><div class="row"><button class="btn" onclick="speak('Bienvenido. Este recurso te ayudará a comprender mejor lo que lees. Sigue los módulos en orden y responde las actividades. ¡Tú puedes!')">🔊 Escuchar bienvenida</button><button class="btn sec" onclick="go('obj')">Ver objetivos</button></div></div>${st}<h3>Ruta de aprendizaje</h3>${mods}<button class="mod" onclick="go('fin')"><span class="ic">✅</span><div><b>Cierre y autoevaluación</b><br><small>Resumen, glosario y reflexión.</small></div></button>`;
+}
+function obj(){return `<div class="card"><h2>🎯 Objetivos de aprendizaje</h2><p>Al terminar este recurso podrás:</p><ol><li>Identificar la idea principal y la información explícita de un texto.</li><li>Diferenciar entre lectura <b>literal</b> e <b>inferencial</b>.</li><li>Aplicar estrategias de comprensión y autoevaluar tu progreso.</li></ol></div>
+ <div class="card"><h3>¿Por qué es importante?</h3><p>El Estado de la Educación 2025 alertó sobre el rezago en comprensión lectora en Costa Rica: muchos estudiantes descifran el texto, pero no logran interpretarlo. Este recurso practica justo esa habilidad.</p></div>
+ <div class="card"><h3>Ruta pedagógica</h3><p>Activar saberes previos → Contenido → Práctica con retroalimentación → Evaluación → Cierre.</p><details><summary>Antes de empezar: ¿qué sabes?</summary><p>Piensa: ¿cuándo fue la última vez que leíste algo y no lo entendiste? ¿Qué hiciste? Guarda esa idea; la usarás en el cierre.</p></details></div>${pager()}`}
+
+function opt(k,i,j){const a=S[k].a[i],q=M[k].qs[i];let c="";if(a!==undefined){if(j===q.c)c="ok";else if(S[k].pick&&S[k].pick[i]===j)c="no"}return `<button class="opt ${c}" ${a!==undefined?'disabled':''} onclick="pick('${k}',${i},${j})">${q.o[j]}</button>`}
+function qhtml(k,i){const q=M[k].qs[i],a=S[k].a[i];return `<div class="q"><span class="tag">Pregunta ${i+1} de ${tot(k)}</span><p>${q.q}</p>${q.o.map((_,j)=>opt(k,i,j)).join("")}${a!==undefined?`<div class="fb ${a?'ok':'no'}">${a?'✅ ¡Correcto! ':'❌ Casi. '}${q.f}</div>`:""}</div>`}
+function pick(k,i,j){if(S[k].a[i]!==undefined)return;S[k].pick=S[k].pick||{};S[k].pick[i]=j;S[k].a[i]=(j===M[k].qs[i].c);render(true)}
+function mod(k){const m=M[k];
+ const txt=m.text?`<div class="read">${m.text}</div><div class="row" style="margin-top:0"><button class="btn sec" onclick="speak(M['${k}'].text)">🔊 Escuchar el texto</button><button class="btn sec" onclick="stop()">⏹ Detener</button></div>`:"";
+ const ex=m.extra?`<h3 style="margin-top:14px">Pistas</h3>${m.extra.map(e=>`<details><summary>${e[0]}</summary><p>${e[1]}</p></details>`).join("")}`:"";
+ let fin="";
+ if(done(k)===tot(k)){const r=right(k),t=tot(k);fin=k==="quiz"?`<div class="card res" style="margin-top:16px"><b>${r}/${t}</b>${r>=7?"🌟 ¡Excelente comprensión!":r>=5?"👍 ¡Muy bien! Repasa los módulos para mejorar.":"💪 Sigue practicando: vuelve a los módulos 1 a 3."}<div class="row" style="justify-content:center"><button class="btn sec" onclick="reset('quiz')">Intentar de nuevo</button></div></div>`:`<div class="fb ok" style="margin-top:12px">🎉 Módulo completado: ${r}/${t} correctas.</div>`}
+ return `<div class="card"><h2>${m.ic} ${m.n}</h2><p>${m.intro}</p>${txt}${ex}${m.qs.map((_,i)=>qhtml(k,i)).join("")}${fin}</div>${pager()}`}
+function reset(k){S[k]={a:{}};render()}
+function fin(){return `<div class="card"><h2>✅ Cierre</h2><div class="res"><b>${pct()}%</b>de actividades completadas · ${score()} respuestas correctas</div></div>
+ <div class="card"><h3>Resumen</h3><ul><li><b>Literal:</b> la respuesta está escrita en el texto.</li><li><b>Inferencial:</b> se deduce con pistas del texto y tus saberes.</li><li><b>Estrategias:</b> predecir, buscar pistas, resumir y explicar con tus palabras.</li></ul></div>
+ <div class="card"><h3>Autoevaluación</h3><label class="ck"><input type="checkbox"> Puedo señalar información explícita en un texto.</label><label class="ck"><input type="checkbox"> Puedo explicar la diferencia entre literal e inferencial.</label><label class="ck"><input type="checkbox"> Sé qué hacer cuando no entiendo una palabra.</label><label class="ck"><input type="checkbox"> Puedo resumir un texto con mis palabras.</label></div>
+ <div class="card"><h3>Glosario</h3><div class="tbl"><details><summary>Idea principal</summary><p>Mensaje central del texto.</p></details><details><summary>Inferencia</summary><p>Conclusión que sacas a partir de pistas.</p></details><details><summary>Contexto</summary><p>Palabras y frases alrededor que ayudan a entender un término.</p></details><details><summary>Predicción</summary><p>Hipótesis sobre lo que dirá el texto antes de leerlo.</p></details></div></div>
+ <div class="card"><h3>Para seguir practicando</h3><p>Lee una noticia corta cada día y escribe: ¿cuál es la idea principal? ¿qué puedo inferir?</p></div>${pager()}`}
+
+function render(keep){
+ const y=window.scrollY;nav();
+ $("#app").innerHTML=view==="home"?home():view==="obj"?obj():view==="fin"?fin():mod(view);
+ if(keep)window.scrollTo(0,y);
+}
+render();
+</script>
+</body>
+</html>
